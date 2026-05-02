@@ -1,0 +1,1386 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+4 0 obj
+<< /Length 2547 >>
+stream
+BT
+/F2 22 Tf
+1 0 0 1 54 782 Tm
+(Documentation Complete du Projet) Tj
+/F2 22 Tf
+1 0 0 1 54 755 Tm
+(EduPredict) Tj
+/F2 16 Tf
+1 0 0 1 54 708 Tm
+(1. Presentation generale) Tj
+/F1 11 Tf
+1 0 0 1 54 669 Tm
+(EduPredict est une application web de prediction de reussite scolaire.) Tj
+/F1 11 Tf
+1 0 0 1 54 649 Tm
+(Le projet combine :) Tj
+/F1 11 Tf
+1 0 0 1 54 619 Tm
+(- un frontend web Laravel base sur Blade et Bootstrap) Tj
+/F1 11 Tf
+1 0 0 1 54 603 Tm
+(- un backend web Laravel pour la logique metier, l'authentification et la) Tj
+/F1 11 Tf
+1 0 0 1 54 587 Tm
+(  persistence MySQL) Tj
+/F1 11 Tf
+1 0 0 1 54 571 Tm
+(- un backend Python FastAPI pour la prediction machine learning) Tj
+/F1 11 Tf
+1 0 0 1 54 555 Tm
+(- une interface Streamlit optionnelle pour tester le modele Python en dehors de) Tj
+/F1 11 Tf
+1 0 0 1 54 539 Tm
+(  Laravel) Tj
+/F1 11 Tf
+1 0 0 1 54 513 Tm
+(L'objectif principal est de permettre a un etudiant de saisir des informations) Tj
+/F1 11 Tf
+1 0 0 1 54 497 Tm
+(academiques, d'obtenir une prediction de reussite, puis d'enregistrer cette) Tj
+/F1 11 Tf
+1 0 0 1 54 481 Tm
+(prediction dans l'application. L'administrateur dispose ensuite d'un tableau de bord) Tj
+/F1 11 Tf
+1 0 0 1 54 465 Tm
+(global avec statistiques et historique.) Tj
+/F2 16 Tf
+1 0 0 1 54 435 Tm
+(2. Objectifs fonctionnels) Tj
+/F1 11 Tf
+1 0 0 1 54 396 Tm
+(Le projet couvre les besoins suivants :) Tj
+/F1 11 Tf
+1 0 0 1 54 366 Tm
+(- inscription d'un utilisateur etudiant) Tj
+/F1 11 Tf
+1 0 0 1 54 350 Tm
+(- connexion avec gestion de session) Tj
+/F1 11 Tf
+1 0 0 1 54 334 Tm
+(- separation des roles `student` et `admin`) Tj
+/F1 11 Tf
+1 0 0 1 54 318 Tm
+(- saisie d'un formulaire de prediction) Tj
+/F1 11 Tf
+1 0 0 1 54 302 Tm
+(- appel d'une API Python locale pour calculer la prediction) Tj
+/F1 11 Tf
+1 0 0 1 54 286 Tm
+(- enregistrement du resultat dans la base de donnees) Tj
+/F1 11 Tf
+1 0 0 1 54 270 Tm
+(- consultation de l'historique cote etudiant) Tj
+/F1 11 Tf
+1 0 0 1 54 254 Tm
+(- consultation de statistiques globales cote administrateur) Tj
+/F2 16 Tf
+1 0 0 1 54 228 Tm
+(3. Architecture globale) Tj
+/F1 11 Tf
+1 0 0 1 54 189 Tm
+(Le projet est compose de deux repertoires principaux :) Tj
+/F1 11 Tf
+1 0 0 1 54 159 Tm
+(- `edupredict/` : application Laravel) Tj
+/F1 11 Tf
+1 0 0 1 54 143 Tm
+(- `student_project/student_project/` : partie Python machine learning) Tj
+/F1 11 Tf
+1 0 0 1 54 117 Tm
+(Architecture logique :) Tj
+/F1 11 Tf
+1 0 0 1 54 87 Tm
+(1. Le navigateur ouvre l'application Laravel.) Tj
+/F1 11 Tf
+1 0 0 1 54 71 Tm
+(2. Laravel affiche les pages HTML du frontend.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 2113 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 54 782 Tm
+(3. L'etudiant soumet le formulaire de prediction.) Tj
+/F1 11 Tf
+1 0 0 1 54 766 Tm
+(4. Laravel appelle l'API Python `POST /predict`.) Tj
+/F1 11 Tf
+1 0 0 1 54 750 Tm
+(5. FastAPI charge le modele et retourne un resultat JSON.) Tj
+/F1 11 Tf
+1 0 0 1 54 734 Tm
+(6. Laravel enregistre le resultat dans MySQL.) Tj
+/F1 11 Tf
+1 0 0 1 54 718 Tm
+(7. Les dashboards etudiant et admin lisent les donnees depuis la base.) Tj
+/F2 16 Tf
+1 0 0 1 54 692 Tm
+(4. Technologies utilisees) Tj
+/F2 13 Tf
+1 0 0 1 54 653 Tm
+(Cote Laravel) Tj
+/F1 11 Tf
+1 0 0 1 54 619 Tm
+(- PHP 8.2+) Tj
+/F1 11 Tf
+1 0 0 1 54 603 Tm
+(- Laravel 12) Tj
+/F1 11 Tf
+1 0 0 1 54 587 Tm
+(- Blade) Tj
+/F1 11 Tf
+1 0 0 1 54 571 Tm
+(- Bootstrap) Tj
+/F1 11 Tf
+1 0 0 1 54 555 Tm
+(- Eloquent ORM) Tj
+/F1 11 Tf
+1 0 0 1 54 539 Tm
+(- MySQL) Tj
+/F1 11 Tf
+1 0 0 1 54 523 Tm
+(- Vite) Tj
+/F1 11 Tf
+1 0 0 1 54 507 Tm
+(- Node.js / npm) Tj
+/F2 13 Tf
+1 0 0 1 54 481 Tm
+(Cote Python) Tj
+/F1 11 Tf
+1 0 0 1 54 447 Tm
+(- Python 3.10+) Tj
+/F1 11 Tf
+1 0 0 1 54 431 Tm
+(- pandas) Tj
+/F1 11 Tf
+1 0 0 1 54 415 Tm
+(- scikit-learn) Tj
+/F1 11 Tf
+1 0 0 1 54 399 Tm
+(- joblib) Tj
+/F1 11 Tf
+1 0 0 1 54 383 Tm
+(- FastAPI) Tj
+/F1 11 Tf
+1 0 0 1 54 367 Tm
+(- uvicorn) Tj
+/F1 11 Tf
+1 0 0 1 54 351 Tm
+(- Streamlit) Tj
+/F2 16 Tf
+1 0 0 1 54 325 Tm
+(5. Organisation des dossiers) Tj
+/F2 13 Tf
+1 0 0 1 54 286 Tm
+(Application Laravel) Tj
+/F1 11 Tf
+1 0 0 1 54 252 Tm
+(- `app/Http/Controllers/` : logique des pages et actions) Tj
+/F1 11 Tf
+1 0 0 1 54 236 Tm
+(- `app/Http/Middleware/` : controle des acces par role) Tj
+/F1 11 Tf
+1 0 0 1 54 220 Tm
+(- `app/Models/` : modeles Eloquent) Tj
+/F1 11 Tf
+1 0 0 1 54 204 Tm
+(- `config/` : configuration Laravel) Tj
+/F1 11 Tf
+1 0 0 1 54 188 Tm
+(- `database/migrations/` : structure de la base) Tj
+/F1 11 Tf
+1 0 0 1 54 172 Tm
+(- `database/seeders/` : creation des donnees initiales) Tj
+/F1 11 Tf
+1 0 0 1 54 156 Tm
+(- `resources/views/` : templates Blade) Tj
+/F1 11 Tf
+1 0 0 1 54 140 Tm
+(- `routes/web.php` : routes web) Tj
+/F2 13 Tf
+1 0 0 1 54 114 Tm
+(Projet Python) Tj
+/F1 11 Tf
+1 0 0 1 54 80 Tm
+(- `api.py` : API FastAPI de prediction) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Length 2470 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 54 782 Tm
+(- `app.py` : interface Streamlit de test) Tj
+/F1 11 Tf
+1 0 0 1 54 766 Tm
+(- `train.py` : entrainement du modele) Tj
+/F1 11 Tf
+1 0 0 1 54 750 Tm
+(- `data/student.csv` : dataset source) Tj
+/F1 11 Tf
+1 0 0 1 54 734 Tm
+(- `model/model.pkl` : modele entraine) Tj
+/F1 11 Tf
+1 0 0 1 54 718 Tm
+(- `model/scaler.pkl` : scaler entraine) Tj
+/F1 11 Tf
+1 0 0 1 54 702 Tm
+(- `model/columns.pkl` : liste des features) Tj
+/F2 16 Tf
+1 0 0 1 54 676 Tm
+(6. Frontend, backend et separation des responsabilites) Tj
+/F2 13 Tf
+1 0 0 1 54 637 Tm
+(Frontend principal) Tj
+/F1 11 Tf
+1 0 0 1 54 603 Tm
+(Le frontend principal est dans Laravel via les vues Blade :) Tj
+/F1 11 Tf
+1 0 0 1 54 573 Tm
+(- `resources/views/auth/login.blade.php`) Tj
+/F1 11 Tf
+1 0 0 1 54 557 Tm
+(- `resources/views/auth/register.blade.php`) Tj
+/F1 11 Tf
+1 0 0 1 54 541 Tm
+(- `resources/views/student/dashboard.blade.php`) Tj
+/F1 11 Tf
+1 0 0 1 54 525 Tm
+(- `resources/views/admin/dashboard.blade.php`) Tj
+/F1 11 Tf
+1 0 0 1 54 499 Tm
+(Ce frontend affiche les formulaires, les tableaux, les cartes de statistiques et les) Tj
+/F1 11 Tf
+1 0 0 1 54 483 Tm
+(messages d'erreur/succes.) Tj
+/F2 13 Tf
+1 0 0 1 54 453 Tm
+(Backend principal) Tj
+/F1 11 Tf
+1 0 0 1 54 419 Tm
+(Le backend principal est egalement Laravel :) Tj
+/F1 11 Tf
+1 0 0 1 54 389 Tm
+(- `AuthController.php` gere login, register et logout) Tj
+/F1 11 Tf
+1 0 0 1 54 373 Tm
+(- `StudentController.php` gere l'affichage du dashboard etudiant et l'appel a l'API) Tj
+/F1 11 Tf
+1 0 0 1 54 357 Tm
+(  Python) Tj
+/F1 11 Tf
+1 0 0 1 54 341 Tm
+(- `AdminController.php` gere les statistiques globales) Tj
+/F1 11 Tf
+1 0 0 1 54 325 Tm
+(- `RoleMiddleware.php` protege l'acces selon le role) Tj
+/F2 13 Tf
+1 0 0 1 54 299 Tm
+(Backend machine learning) Tj
+/F1 11 Tf
+1 0 0 1 54 265 Tm
+(Le backend de prediction est en Python :) Tj
+/F1 11 Tf
+1 0 0 1 54 235 Tm
+(- `train.py` entraine le modele) Tj
+/F1 11 Tf
+1 0 0 1 54 219 Tm
+(- `api.py` expose le modele sous forme d'API HTTP) Tj
+/F2 13 Tf
+1 0 0 1 54 193 Tm
+(Frontend secondaire de test) Tj
+/F1 11 Tf
+1 0 0 1 54 159 Tm
+(`app.py` fournit une interface Streamlit pour tester directement le modele Python) Tj
+/F1 11 Tf
+1 0 0 1 54 143 Tm
+(sans passer par Laravel. Cette interface est utile en phase de developpement, mais) Tj
+/F1 11 Tf
+1 0 0 1 54 127 Tm
+(elle n'est pas obligatoire pour le fonctionnement final de l'application web.) Tj
+/F2 16 Tf
+1 0 0 1 54 97 Tm
+(7. Description detaillee du frontend Laravel) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Length 2009 >>
+stream
+BT
+/F2 13 Tf
+1 0 0 1 54 782 Tm
+(Authentification) Tj
+/F1 11 Tf
+1 0 0 1 54 748 Tm
+(Le frontend d'authentification contient :) Tj
+/F1 11 Tf
+1 0 0 1 54 718 Tm
+(- une page de connexion) Tj
+/F1 11 Tf
+1 0 0 1 54 702 Tm
+(- une page d'inscription) Tj
+/F1 11 Tf
+1 0 0 1 54 676 Tm
+(Lorsqu'un utilisateur se connecte :) Tj
+/F1 11 Tf
+1 0 0 1 54 646 Tm
+(- Laravel verifie l'email et le mot de passe) Tj
+/F1 11 Tf
+1 0 0 1 54 630 Tm
+(- la session est regeneree) Tj
+/F1 11 Tf
+1 0 0 1 54 614 Tm
+(- l'utilisateur est redirige vers le dashboard correspondant a son role) Tj
+/F2 13 Tf
+1 0 0 1 54 588 Tm
+(Dashboard etudiant) Tj
+/F1 11 Tf
+1 0 0 1 54 554 Tm
+(Le dashboard etudiant permet :) Tj
+/F1 11 Tf
+1 0 0 1 54 524 Tm
+(- de voir son historique de predictions) Tj
+/F1 11 Tf
+1 0 0 1 54 508 Tm
+(- de visualiser son taux de reussite personnel) Tj
+/F1 11 Tf
+1 0 0 1 54 492 Tm
+(- de soumettre une nouvelle prediction) Tj
+/F1 11 Tf
+1 0 0 1 54 476 Tm
+(- de consulter la probabilite de reussite renvoyee par l'API) Tj
+/F2 13 Tf
+1 0 0 1 54 450 Tm
+(Dashboard admin) Tj
+/F1 11 Tf
+1 0 0 1 54 416 Tm
+(Le dashboard admin permet :) Tj
+/F1 11 Tf
+1 0 0 1 54 386 Tm
+(- de consulter toutes les predictions) Tj
+/F1 11 Tf
+1 0 0 1 54 370 Tm
+(- d'afficher des statistiques globales) Tj
+/F1 11 Tf
+1 0 0 1 54 354 Tm
+(- de voir la repartition des resultats) Tj
+/F1 11 Tf
+1 0 0 1 54 338 Tm
+(- de suivre la moyenne des probabilites) Tj
+/F2 16 Tf
+1 0 0 1 54 312 Tm
+(8. Description detaillee du backend Laravel) Tj
+/F2 13 Tf
+1 0 0 1 54 273 Tm
+(Routes) Tj
+/F1 11 Tf
+1 0 0 1 54 239 Tm
+(Les routes sont definies dans `routes/web.php`.) Tj
+/F1 11 Tf
+1 0 0 1 54 209 Tm
+(Principales routes :) Tj
+/F1 11 Tf
+1 0 0 1 54 179 Tm
+(- `GET /login`) Tj
+/F1 11 Tf
+1 0 0 1 54 163 Tm
+(- `POST /login`) Tj
+/F1 11 Tf
+1 0 0 1 54 147 Tm
+(- `GET /register`) Tj
+/F1 11 Tf
+1 0 0 1 54 131 Tm
+(- `POST /register`) Tj
+/F1 11 Tf
+1 0 0 1 54 115 Tm
+(- `POST /logout`) Tj
+/F1 11 Tf
+1 0 0 1 54 99 Tm
+(- `GET /student/dashboard`) Tj
+/F1 11 Tf
+1 0 0 1 54 83 Tm
+(- `POST /student/predict`) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Length 2043 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 54 782 Tm
+(- `GET /admin/dashboard`) Tj
+/F2 13 Tf
+1 0 0 1 54 756 Tm
+(AuthController) Tj
+/F1 11 Tf
+1 0 0 1 54 722 Tm
+(Responsabilites :) Tj
+/F1 11 Tf
+1 0 0 1 54 692 Tm
+(- afficher les formulaires de connexion et d'inscription) Tj
+/F1 11 Tf
+1 0 0 1 54 676 Tm
+(- authentifier l'utilisateur) Tj
+/F1 11 Tf
+1 0 0 1 54 660 Tm
+(- creer un nouvel etudiant avec le role `student`) Tj
+/F1 11 Tf
+1 0 0 1 54 644 Tm
+(- fermer la session) Tj
+/F2 13 Tf
+1 0 0 1 54 618 Tm
+(StudentController) Tj
+/F1 11 Tf
+1 0 0 1 54 584 Tm
+(Responsabilites :) Tj
+/F1 11 Tf
+1 0 0 1 54 554 Tm
+(- recuperer les predictions de l'utilisateur courant) Tj
+/F1 11 Tf
+1 0 0 1 54 538 Tm
+(- calculer les statistiques personnelles) Tj
+/F1 11 Tf
+1 0 0 1 54 522 Tm
+(- valider le formulaire de prediction) Tj
+/F1 11 Tf
+1 0 0 1 54 506 Tm
+(- appeler l'API Python) Tj
+/F1 11 Tf
+1 0 0 1 54 490 Tm
+(- capturer les erreurs de connexion ou de reponse API) Tj
+/F1 11 Tf
+1 0 0 1 54 474 Tm
+(- enregistrer le resultat dans la table `students`) Tj
+/F1 11 Tf
+1 0 0 1 54 448 Tm
+(Les champs envoyes a l'API sont :) Tj
+/F1 11 Tf
+1 0 0 1 54 418 Tm
+(- `age`) Tj
+/F1 11 Tf
+1 0 0 1 54 402 Tm
+(- `studytime`) Tj
+/F1 11 Tf
+1 0 0 1 54 386 Tm
+(- `failures`) Tj
+/F1 11 Tf
+1 0 0 1 54 370 Tm
+(- `absences`) Tj
+/F2 13 Tf
+1 0 0 1 54 344 Tm
+(AdminController) Tj
+/F1 11 Tf
+1 0 0 1 54 310 Tm
+(Responsabilites :) Tj
+/F1 11 Tf
+1 0 0 1 54 280 Tm
+(- afficher toutes les predictions) Tj
+/F1 11 Tf
+1 0 0 1 54 264 Tm
+(- calculer le nombre total de predictions) Tj
+/F1 11 Tf
+1 0 0 1 54 248 Tm
+(- calculer le taux de reussite global) Tj
+/F1 11 Tf
+1 0 0 1 54 232 Tm
+(- produire les donnees necessaires aux graphiques et indicateurs) Tj
+/F2 13 Tf
+1 0 0 1 54 206 Tm
+(RoleMiddleware) Tj
+/F1 11 Tf
+1 0 0 1 54 172 Tm
+(Ce middleware controle que l'utilisateur connecte possede bien le role attendu. En) Tj
+/F1 11 Tf
+1 0 0 1 54 156 Tm
+(cas de role incorrect, Laravel retourne une erreur HTTP 403.) Tj
+/F2 16 Tf
+1 0 0 1 54 126 Tm
+(9. Description detaillee du backend Python) Tj
+/F2 13 Tf
+1 0 0 1 54 87 Tm
+(train.py) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Length 1929 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 54 772 Tm
+(`train.py` realise les taches suivantes :) Tj
+/F1 11 Tf
+1 0 0 1 54 742 Tm
+(1. lecture du fichier CSV) Tj
+/F1 11 Tf
+1 0 0 1 54 726 Tm
+(2. selection des variables utiles) Tj
+/F1 11 Tf
+1 0 0 1 54 710 Tm
+(3. creation de la variable cible `target`) Tj
+/F1 11 Tf
+1 0 0 1 54 694 Tm
+(4. separation train/test) Tj
+/F1 11 Tf
+1 0 0 1 54 678 Tm
+(5. normalisation avec `StandardScaler`) Tj
+/F1 11 Tf
+1 0 0 1 54 662 Tm
+(6. entrainement d'une `LogisticRegression`) Tj
+/F1 11 Tf
+1 0 0 1 54 646 Tm
+(7. evaluation du modele) Tj
+/F1 11 Tf
+1 0 0 1 54 630 Tm
+(8. sauvegarde du modele et du scaler) Tj
+/F2 13 Tf
+1 0 0 1 54 604 Tm
+(api.py) Tj
+/F1 11 Tf
+1 0 0 1 54 570 Tm
+(`api.py` expose deux routes :) Tj
+/F1 11 Tf
+1 0 0 1 54 540 Tm
+(- `GET /`) Tj
+/F1 11 Tf
+1 0 0 1 54 524 Tm
+(- `POST /predict`) Tj
+/F1 11 Tf
+1 0 0 1 54 498 Tm
+(La route `POST /predict` :) Tj
+/F1 11 Tf
+1 0 0 1 54 468 Tm
+(1. recoit un JSON) Tj
+/F1 11 Tf
+1 0 0 1 54 452 Tm
+(2. transforme ce JSON en DataFrame) Tj
+/F1 11 Tf
+1 0 0 1 54 436 Tm
+(3. applique le scaler) Tj
+/F1 11 Tf
+1 0 0 1 54 420 Tm
+(4. appelle le modele) Tj
+/F1 11 Tf
+1 0 0 1 54 404 Tm
+(5. retourne :) Tj
+/F1 11 Tf
+1 0 0 1 54 388 Tm
+(- `prediction`) Tj
+/F1 11 Tf
+1 0 0 1 54 372 Tm
+(- `probability_success`) Tj
+/F2 13 Tf
+1 0 0 1 54 346 Tm
+(app.py) Tj
+/F1 11 Tf
+1 0 0 1 54 312 Tm
+(`app.py` est une interface Streamlit simple qui :) Tj
+/F1 11 Tf
+1 0 0 1 54 282 Tm
+(- charge le modele et le scaler) Tj
+/F1 11 Tf
+1 0 0 1 54 266 Tm
+(- affiche des champs de saisie) Tj
+/F1 11 Tf
+1 0 0 1 54 250 Tm
+(- effectue une prediction locale) Tj
+/F1 11 Tf
+1 0 0 1 54 234 Tm
+(- montre un resultat lisible pour l'utilisateur) Tj
+/F2 16 Tf
+1 0 0 1 54 208 Tm
+(10. Modele de donnees) Tj
+/F2 13 Tf
+1 0 0 1 54 169 Tm
+(Table users) Tj
+/F1 11 Tf
+1 0 0 1 54 135 Tm
+(Colonnes importantes :) Tj
+/F1 11 Tf
+1 0 0 1 54 105 Tm
+(- `id`) Tj
+/F1 11 Tf
+1 0 0 1 54 89 Tm
+(- `name`) Tj
+/F1 11 Tf
+1 0 0 1 54 73 Tm
+(- `email`) Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Length 1823 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 54 782 Tm
+(- `role`) Tj
+/F1 11 Tf
+1 0 0 1 54 766 Tm
+(- `password`) Tj
+/F1 11 Tf
+1 0 0 1 54 750 Tm
+(- `remember_token`) Tj
+/F1 11 Tf
+1 0 0 1 54 734 Tm
+(- `created_at`) Tj
+/F1 11 Tf
+1 0 0 1 54 718 Tm
+(- `updated_at`) Tj
+/F1 11 Tf
+1 0 0 1 54 692 Tm
+(Le role est ajoute par migration et vaut par defaut `student`.) Tj
+/F2 13 Tf
+1 0 0 1 54 662 Tm
+(Table students) Tj
+/F1 11 Tf
+1 0 0 1 54 628 Tm
+(Colonnes importantes :) Tj
+/F1 11 Tf
+1 0 0 1 54 598 Tm
+(- `id`) Tj
+/F1 11 Tf
+1 0 0 1 54 582 Tm
+(- `user_id`) Tj
+/F1 11 Tf
+1 0 0 1 54 566 Tm
+(- `name`) Tj
+/F1 11 Tf
+1 0 0 1 54 550 Tm
+(- `age`) Tj
+/F1 11 Tf
+1 0 0 1 54 534 Tm
+(- `study_time`) Tj
+/F1 11 Tf
+1 0 0 1 54 518 Tm
+(- `failures`) Tj
+/F1 11 Tf
+1 0 0 1 54 502 Tm
+(- `absence`) Tj
+/F1 11 Tf
+1 0 0 1 54 486 Tm
+(- `filiere`) Tj
+/F1 11 Tf
+1 0 0 1 54 470 Tm
+(- `probability`) Tj
+/F1 11 Tf
+1 0 0 1 54 454 Tm
+(- `result`) Tj
+/F1 11 Tf
+1 0 0 1 54 438 Tm
+(- `created_at`) Tj
+/F1 11 Tf
+1 0 0 1 54 422 Tm
+(- `updated_at`) Tj
+/F1 11 Tf
+1 0 0 1 54 396 Tm
+(Cette table enregistre l'ensemble des predictions effectuees depuis l'application.) Tj
+/F2 16 Tf
+1 0 0 1 54 366 Tm
+(11. Jeu de donnees et logique ML) Tj
+/F1 11 Tf
+1 0 0 1 54 327 Tm
+(Le dataset source est `data/student.csv`.) Tj
+/F1 11 Tf
+1 0 0 1 54 297 Tm
+(Les features retenues dans le code sont :) Tj
+/F1 11 Tf
+1 0 0 1 54 267 Tm
+(- `age`) Tj
+/F1 11 Tf
+1 0 0 1 54 251 Tm
+(- `studytime`) Tj
+/F1 11 Tf
+1 0 0 1 54 235 Tm
+(- `failures`) Tj
+/F1 11 Tf
+1 0 0 1 54 219 Tm
+(- `absences`) Tj
+/F1 11 Tf
+1 0 0 1 54 193 Tm
+(La cible est construite a partir de `G3` :) Tj
+/F1 11 Tf
+1 0 0 1 54 163 Tm
+(- `1` si `G3 >= 10`) Tj
+/F1 11 Tf
+1 0 0 1 54 147 Tm
+(- `0` si `G3 < 10`) Tj
+/F1 11 Tf
+1 0 0 1 54 121 Tm
+(Le modele utilise est une regression logistique.) Tj
+/F2 16 Tf
+1 0 0 1 54 91 Tm
+(12. Flux complet d'une prediction) Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Length 1998 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 54 772 Tm
+(1. L'etudiant se connecte.) Tj
+/F1 11 Tf
+1 0 0 1 54 756 Tm
+(2. Il ouvre son dashboard.) Tj
+/F1 11 Tf
+1 0 0 1 54 740 Tm
+(3. Il remplit le formulaire.) Tj
+/F1 11 Tf
+1 0 0 1 54 724 Tm
+(4. Laravel valide les champs.) Tj
+/F1 11 Tf
+1 0 0 1 54 708 Tm
+(5. Laravel envoie une requete HTTP a `PREDICT_API_URL`.) Tj
+/F1 11 Tf
+1 0 0 1 54 692 Tm
+(6. FastAPI calcule la prediction.) Tj
+/F1 11 Tf
+1 0 0 1 54 676 Tm
+(7. FastAPI retourne un JSON.) Tj
+/F1 11 Tf
+1 0 0 1 54 660 Tm
+(8. Laravel convertit le JSON en resultat metier :) Tj
+/F1 11 Tf
+1 0 0 1 54 644 Tm
+(- `Reussi`) Tj
+/F1 11 Tf
+1 0 0 1 54 628 Tm
+(- `Echoue`) Tj
+/F1 11 Tf
+1 0 0 1 54 612 Tm
+(9. Laravel stocke la prediction en base.) Tj
+/F1 11 Tf
+1 0 0 1 54 596 Tm
+(10. Le dashboard se recharge avec le nouveau resultat.) Tj
+/F2 16 Tf
+1 0 0 1 54 570 Tm
+(13. Variables d'environnement) Tj
+/F2 13 Tf
+1 0 0 1 54 531 Tm
+(Fichier `.env`) Tj
+/F1 11 Tf
+1 0 0 1 54 497 Tm
+(Le fichier `.env` contient les vraies valeurs utilisees localement.) Tj
+/F1 11 Tf
+1 0 0 1 54 467 Tm
+(Exemples importants :) Tj
+/F1 11 Tf
+1 0 0 1 54 437 Tm
+(- `APP_NAME`) Tj
+/F1 11 Tf
+1 0 0 1 54 421 Tm
+(- `APP_ENV`) Tj
+/F1 11 Tf
+1 0 0 1 54 405 Tm
+(- `APP_KEY`) Tj
+/F1 11 Tf
+1 0 0 1 54 389 Tm
+(- `APP_URL`) Tj
+/F1 11 Tf
+1 0 0 1 54 373 Tm
+(- `DB_CONNECTION`) Tj
+/F1 11 Tf
+1 0 0 1 54 357 Tm
+(- `DB_HOST`) Tj
+/F1 11 Tf
+1 0 0 1 54 341 Tm
+(- `DB_PORT`) Tj
+/F1 11 Tf
+1 0 0 1 54 325 Tm
+(- `DB_DATABASE`) Tj
+/F1 11 Tf
+1 0 0 1 54 309 Tm
+(- `DB_USERNAME`) Tj
+/F1 11 Tf
+1 0 0 1 54 293 Tm
+(- `DB_PASSWORD`) Tj
+/F1 11 Tf
+1 0 0 1 54 277 Tm
+(- `PREDICT_API_URL`) Tj
+/F2 13 Tf
+1 0 0 1 54 251 Tm
+(Fichier `.env.example`) Tj
+/F1 11 Tf
+1 0 0 1 54 217 Tm
+(Le fichier `.env.example` est un modele partageable. Il sert de point de depart pour) Tj
+/F1 11 Tf
+1 0 0 1 54 201 Tm
+(generer un `.env` fonctionnel.) Tj
+/F2 16 Tf
+1 0 0 1 54 171 Tm
+(14. Installation complete sous Windows) Tj
+/F2 13 Tf
+1 0 0 1 54 132 Tm
+(Prerequis) Tj
+/F1 11 Tf
+1 0 0 1 54 98 Tm
+(Installer au minimum :) Tj
+ET
+endstream
+endobj
+12 0 obj
+<< /Length 1496 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 54 782 Tm
+(- PHP 8.2 ou plus) Tj
+/F1 11 Tf
+1 0 0 1 54 766 Tm
+(- Composer) Tj
+/F1 11 Tf
+1 0 0 1 54 750 Tm
+(- Node.js et npm) Tj
+/F1 11 Tf
+1 0 0 1 54 734 Tm
+(- Python 3.10 ou plus) Tj
+/F1 11 Tf
+1 0 0 1 54 718 Tm
+(- MySQL) Tj
+/F2 13 Tf
+1 0 0 1 54 692 Tm
+(Installation de Laravel) Tj
+/F1 11 Tf
+1 0 0 1 54 658 Tm
+(Depuis le dossier `edupredict` :) Tj
+/F3 9 Tf
+1 0 0 1 66 618 Tm
+(composer install) Tj
+/F3 9 Tf
+1 0 0 1 66 606 Tm
+(npm install) Tj
+/F3 9 Tf
+1 0 0 1 66 594 Tm
+(copy .env.example .env) Tj
+/F3 9 Tf
+1 0 0 1 66 582 Tm
+(php artisan key:generate) Tj
+/F3 9 Tf
+1 0 0 1 66 570 Tm
+(php artisan config:clear) Tj
+/F2 13 Tf
+1 0 0 1 54 538 Tm
+(Configuration de la base de donnees) Tj
+/F1 11 Tf
+1 0 0 1 54 504 Tm
+(Creer la base :) Tj
+/F3 9 Tf
+1 0 0 1 66 464 Tm
+(CREATE DATABASE classroom;) Tj
+/F1 11 Tf
+1 0 0 1 54 432 Tm
+(Puis lancer les migrations et le seeder :) Tj
+/F3 9 Tf
+1 0 0 1 66 392 Tm
+(php artisan migrate) Tj
+/F3 9 Tf
+1 0 0 1 66 380 Tm
+(php artisan db:seed) Tj
+/F2 13 Tf
+1 0 0 1 54 348 Tm
+(Installation des dependances Python) Tj
+/F1 11 Tf
+1 0 0 1 54 314 Tm
+(Depuis `student_project/student_project` :) Tj
+/F3 9 Tf
+1 0 0 1 66 274 Tm
+(python -m pip install pandas joblib scikit-learn streamlit fastapi uvicorn) Tj
+/F2 13 Tf
+1 0 0 1 54 242 Tm
+(Entrainement du modele) Tj
+/F3 9 Tf
+1 0 0 1 66 198 Tm
+(python train.py) Tj
+/F2 16 Tf
+1 0 0 1 54 166 Tm
+(15. Commandes de lancement) Tj
+/F2 13 Tf
+1 0 0 1 54 127 Tm
+(Lancer Laravel) Tj
+/F1 11 Tf
+1 0 0 1 54 93 Tm
+(Terminal 1 :) Tj
+ET
+endstream
+endobj
+13 0 obj
+<< /Length 1696 >>
+stream
+BT
+/F3 9 Tf
+1 0 0 1 66 772 Tm
+(cd c:\\Users\\user\\Desktop\\PROJETTTTTTTTT\\wafamay\\classrrom\\edupredict) Tj
+/F3 9 Tf
+1 0 0 1 66 760 Tm
+(php artisan serve) Tj
+/F2 13 Tf
+1 0 0 1 54 728 Tm
+(Lancer Vite) Tj
+/F1 11 Tf
+1 0 0 1 54 694 Tm
+(Terminal 2 :) Tj
+/F3 9 Tf
+1 0 0 1 66 654 Tm
+(cd c:\\Users\\user\\Desktop\\PROJETTTTTTTTT\\wafamay\\classrrom\\edupredict) Tj
+/F3 9 Tf
+1 0 0 1 66 642 Tm
+(npm run dev) Tj
+/F2 13 Tf
+1 0 0 1 54 610 Tm
+(Lancer l'API FastAPI) Tj
+/F1 11 Tf
+1 0 0 1 54 576 Tm
+(Terminal 3 :) Tj
+/F3 9 Tf
+1 0 0 1 66 536 Tm
+(cd) Tj
+/F3 9 Tf
+1 0 0 1 66 524 Tm
+(c:\\Users\\user\\Desktop\\PROJETTTTTTTTT\\wafamay\\classrrom\\student_project\\student_project) Tj
+/F3 9 Tf
+1 0 0 1 66 512 Tm
+(python -m uvicorn api:app --host 127.0.0.1 --port 8001) Tj
+/F2 13 Tf
+1 0 0 1 54 480 Tm
+(Lancer Streamlit) Tj
+/F1 11 Tf
+1 0 0 1 54 446 Tm
+(Terminal 4 optionnel :) Tj
+/F3 9 Tf
+1 0 0 1 66 406 Tm
+(cd) Tj
+/F3 9 Tf
+1 0 0 1 66 394 Tm
+(c:\\Users\\user\\Desktop\\PROJETTTTTTTTT\\wafamay\\classrrom\\student_project\\student_project) Tj
+/F3 9 Tf
+1 0 0 1 66 382 Tm
+(streamlit run app.py) Tj
+/F2 16 Tf
+1 0 0 1 54 350 Tm
+(16. Comptes et acces) Tj
+/F1 11 Tf
+1 0 0 1 54 311 Tm
+(Le seeder cree un administrateur :) Tj
+/F1 11 Tf
+1 0 0 1 54 281 Tm
+(- email : `admin@edupredict.com`) Tj
+/F1 11 Tf
+1 0 0 1 54 265 Tm
+(- mot de passe : `Admin12345`) Tj
+/F1 11 Tf
+1 0 0 1 54 239 Tm
+(Les comptes etudiants sont crees via le formulaire d'inscription.) Tj
+/F2 16 Tf
+1 0 0 1 54 209 Tm
+(17. Format de requete et de reponse API) Tj
+/F2 13 Tf
+1 0 0 1 54 170 Tm
+(Requete) Tj
+/F1 11 Tf
+1 0 0 1 54 136 Tm
+(URL :) Tj
+/F1 11 Tf
+1 0 0 1 54 106 Tm
+(`POST http://127.0.0.1:8001/predict`) Tj
+/F1 11 Tf
+1 0 0 1 54 76 Tm
+(Exemple JSON :) Tj
+ET
+endstream
+endobj
+14 0 obj
+<< /Length 1753 >>
+stream
+BT
+/F3 9 Tf
+1 0 0 1 66 762 Tm
+({) Tj
+/F3 9 Tf
+1 0 0 1 66 750 Tm
+("age": 18,) Tj
+/F3 9 Tf
+1 0 0 1 66 738 Tm
+("studytime": 2,) Tj
+/F3 9 Tf
+1 0 0 1 66 726 Tm
+("failures": 0,) Tj
+/F3 9 Tf
+1 0 0 1 66 714 Tm
+("absences": 3) Tj
+/F3 9 Tf
+1 0 0 1 66 702 Tm
+(}) Tj
+/F2 13 Tf
+1 0 0 1 54 670 Tm
+(Reponse) Tj
+/F3 9 Tf
+1 0 0 1 66 626 Tm
+({) Tj
+/F3 9 Tf
+1 0 0 1 66 614 Tm
+("prediction": 1,) Tj
+/F3 9 Tf
+1 0 0 1 66 602 Tm
+("probability_success": 0.87) Tj
+/F3 9 Tf
+1 0 0 1 66 590 Tm
+(}) Tj
+/F1 11 Tf
+1 0 0 1 54 558 Tm
+(Interpretation :) Tj
+/F1 11 Tf
+1 0 0 1 54 528 Tm
+(- `prediction = 1` signifie `Reussi`) Tj
+/F1 11 Tf
+1 0 0 1 54 512 Tm
+(- `prediction = 0` signifie `Echoue`) Tj
+/F2 16 Tf
+1 0 0 1 54 486 Tm
+(18. Gestion des erreurs) Tj
+/F2 13 Tf
+1 0 0 1 54 447 Tm
+(Cote Laravel) Tj
+/F1 11 Tf
+1 0 0 1 54 413 Tm
+(Si l'API Python est indisponible :) Tj
+/F1 11 Tf
+1 0 0 1 54 383 Tm
+(- Laravel intercepte l'erreur de connexion) Tj
+/F1 11 Tf
+1 0 0 1 54 367 Tm
+(- le formulaire est recharge) Tj
+/F1 11 Tf
+1 0 0 1 54 351 Tm
+(- un message d'erreur explique quelle commande lancer) Tj
+/F1 11 Tf
+1 0 0 1 54 325 Tm
+(Si l'API renvoie une erreur HTTP :) Tj
+/F1 11 Tf
+1 0 0 1 54 295 Tm
+(- Laravel affiche un message indiquant que le service a repondu avec une erreur) Tj
+/F2 13 Tf
+1 0 0 1 54 269 Tm
+(Cote Python) Tj
+/F1 11 Tf
+1 0 0 1 54 235 Tm
+(Si une erreur survient dans `api.py` :) Tj
+/F1 11 Tf
+1 0 0 1 54 205 Tm
+(- FastAPI renvoie une `HTTPException` avec un status 500) Tj
+/F2 16 Tf
+1 0 0 1 54 179 Tm
+(19. Tests et verification) Tj
+/F2 13 Tf
+1 0 0 1 54 140 Tm
+(Verification Laravel) Tj
+/F3 9 Tf
+1 0 0 1 66 96 Tm
+(php artisan test) Tj
+/F3 9 Tf
+1 0 0 1 66 84 Tm
+(php -l app\\Http\\Controllers\\StudentController.php) Tj
+/F3 9 Tf
+1 0 0 1 66 72 Tm
+(php -l config\\services.php) Tj
+ET
+endstream
+endobj
+15 0 obj
+<< /Length 2433 >>
+stream
+BT
+/F2 13 Tf
+1 0 0 1 54 762 Tm
+(Verification API Python) Tj
+/F1 11 Tf
+1 0 0 1 54 728 Tm
+(Route de sante :) Tj
+/F3 9 Tf
+1 0 0 1 66 688 Tm
+(python -c "import urllib.request;) Tj
+/F3 9 Tf
+1 0 0 1 66 676 Tm
+(print\(urllib.request.urlopen\('http://127.0.0.1:8001/'\).read\(\).decode\(\)\)") Tj
+/F1 11 Tf
+1 0 0 1 54 644 Tm
+(Test de prediction :) Tj
+/F3 9 Tf
+1 0 0 1 66 604 Tm
+(python -c "import urllib.request, json;) Tj
+/F3 9 Tf
+1 0 0 1 66 592 Tm
+(req=urllib.request.Request\('http://127.0.0.1:8001/predict',) Tj
+/F3 9 Tf
+1 0 0 1 66 580 Tm
+(data=json.dumps\({'age':18,'studytime':2,'failures':0,'absences':3}\).encode\(\),) Tj
+/F3 9 Tf
+1 0 0 1 66 568 Tm
+(headers={'Content-Type':'application/json'}\);) Tj
+/F3 9 Tf
+1 0 0 1 66 556 Tm
+(print\(urllib.request.urlopen\(req\).read\(\).decode\(\)\)") Tj
+/F2 16 Tf
+1 0 0 1 54 524 Tm
+(20. Points forts du projet) Tj
+/F1 11 Tf
+1 0 0 1 54 485 Tm
+(- architecture separee entre application web et service ML) Tj
+/F1 11 Tf
+1 0 0 1 54 469 Tm
+(- gestion des roles admin/etudiant) Tj
+/F1 11 Tf
+1 0 0 1 54 453 Tm
+(- historique des predictions) Tj
+/F1 11 Tf
+1 0 0 1 54 437 Tm
+(- dashboard de suivi) Tj
+/F1 11 Tf
+1 0 0 1 54 421 Tm
+(- integration simple entre Laravel et FastAPI) Tj
+/F1 11 Tf
+1 0 0 1 54 405 Tm
+(- possibilite de tester le modele avec Streamlit) Tj
+/F2 16 Tf
+1 0 0 1 54 379 Tm
+(21. Limites actuelles) Tj
+/F1 11 Tf
+1 0 0 1 54 340 Tm
+(- pas de fichier `requirements.txt` Python present) Tj
+/F1 11 Tf
+1 0 0 1 54 324 Tm
+(- pas de conteneur Docker pour standardiser le lancement) Tj
+/F1 11 Tf
+1 0 0 1 54 308 Tm
+(- front Laravel et front Streamlit coexistent, ce qui peut creer de la confusion si) Tj
+/F1 11 Tf
+1 0 0 1 54 292 Tm
+(  l'architecture n'est pas documentee) Tj
+/F1 11 Tf
+1 0 0 1 54 276 Tm
+(- la robustesse du service Python depend du bon lancement manuel de `uvicorn`) Tj
+/F2 16 Tf
+1 0 0 1 54 250 Tm
+(22. Ameliorations recommandees) Tj
+/F1 11 Tf
+1 0 0 1 54 211 Tm
+(- ajouter `requirements.txt`) Tj
+/F1 11 Tf
+1 0 0 1 54 195 Tm
+(- ajouter un `README` personnalise au projet) Tj
+/F1 11 Tf
+1 0 0 1 54 179 Tm
+(- ajouter des tests automatiques pour l'API Python) Tj
+/F1 11 Tf
+1 0 0 1 54 163 Tm
+(- centraliser la configuration de lancement) Tj
+/F1 11 Tf
+1 0 0 1 54 147 Tm
+(- conteneuriser Laravel, MySQL et FastAPI avec Docker Compose) Tj
+/F1 11 Tf
+1 0 0 1 54 131 Tm
+(- ajouter une vraie page de monitoring ou un healthcheck plus complet) Tj
+/F2 16 Tf
+1 0 0 1 54 105 Tm
+(23. Resume final) Tj
+ET
+endstream
+endobj
+16 0 obj
+<< /Length 2031 >>
+stream
+BT
+/F1 11 Tf
+1 0 0 1 54 782 Tm
+(EduPredict est une application hybride web + machine learning.) Tj
+/F1 11 Tf
+1 0 0 1 54 752 Tm
+(Le frontend principal est fourni par Laravel, le backend principal est Laravel, et la) Tj
+/F1 11 Tf
+1 0 0 1 54 736 Tm
+(prediction intelligente est delivree par un microservice Python FastAPI. Streamlit) Tj
+/F1 11 Tf
+1 0 0 1 54 720 Tm
+(joue le role d'outil de demonstration et de test rapide du modele.) Tj
+/F1 11 Tf
+1 0 0 1 54 690 Tm
+(Le projet illustre une architecture tres courante en pratique :) Tj
+/F1 11 Tf
+1 0 0 1 54 660 Tm
+(- application web classique pour l'experience utilisateur) Tj
+/F1 11 Tf
+1 0 0 1 54 644 Tm
+(- service ML separe pour la prediction) Tj
+/F1 11 Tf
+1 0 0 1 54 628 Tm
+(- base de donnees relationnelle pour l'historique et les statistiques) Tj
+/F2 16 Tf
+1 0 0 1 54 602 Tm
+(24. Annexes rapides) Tj
+/F2 13 Tf
+1 0 0 1 54 563 Tm
+(Commandes essentielles) Tj
+/F3 9 Tf
+1 0 0 1 66 519 Tm
+(composer install) Tj
+/F3 9 Tf
+1 0 0 1 66 507 Tm
+(npm install) Tj
+/F3 9 Tf
+1 0 0 1 66 495 Tm
+(copy .env.example .env) Tj
+/F3 9 Tf
+1 0 0 1 66 483 Tm
+(php artisan key:generate) Tj
+/F3 9 Tf
+1 0 0 1 66 471 Tm
+(php artisan migrate) Tj
+/F3 9 Tf
+1 0 0 1 66 459 Tm
+(php artisan db:seed) Tj
+/F3 9 Tf
+1 0 0 1 66 447 Tm
+(php artisan serve) Tj
+/F3 9 Tf
+1 0 0 1 66 435 Tm
+(npm run dev) Tj
+/F3 9 Tf
+1 0 0 1 66 423 Tm
+(python -m pip install pandas joblib scikit-learn streamlit fastapi uvicorn) Tj
+/F3 9 Tf
+1 0 0 1 66 411 Tm
+(python train.py) Tj
+/F3 9 Tf
+1 0 0 1 66 399 Tm
+(python -m uvicorn api:app --host 127.0.0.1 --port 8001) Tj
+/F2 13 Tf
+1 0 0 1 54 367 Tm
+(Repertoires principaux) Tj
+/F1 11 Tf
+1 0 0 1 54 333 Tm
+(- `edupredict/`) Tj
+/F1 11 Tf
+1 0 0 1 54 317 Tm
+(- `student_project/student_project/`) Tj
+/F1 11 Tf
+1 0 0 1 54 301 Tm
+(- `docs/`) Tj
+/F2 13 Tf
+1 0 0 1 54 275 Tm
+(Sortie attendue) Tj
+/F1 11 Tf
+1 0 0 1 54 241 Tm
+(L'utilisateur final navigue dans Laravel, tandis que Laravel consomme silencieusement) Tj
+/F1 11 Tf
+1 0 0 1 54 225 Tm
+(l'API Python pour produire la prediction et l'enregistrer.) Tj
+ET
+endstream
+endobj
+17 0 obj
+<< /Type /Pages /Kids [ 18 0 R 19 0 R 20 0 R 21 0 R 22 0 R 23 0 R 24 0 R 25 0 R 26 0 R 27 0 R 28 0 R 29 0 R 30 0 R ] /Count 13 >>
+endobj
+18 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 4 0 R >>
+endobj
+19 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 5 0 R >>
+endobj
+20 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 6 0 R >>
+endobj
+21 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 7 0 R >>
+endobj
+22 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 8 0 R >>
+endobj
+23 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 9 0 R >>
+endobj
+24 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 10 0 R >>
+endobj
+25 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 11 0 R >>
+endobj
+26 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 12 0 R >>
+endobj
+27 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 13 0 R >>
+endobj
+28 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 14 0 R >>
+endobj
+29 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 15 0 R >>
+endobj
+30 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R /F2 2 0 R /F3 3 0 R >> >> /Contents 16 0 R >>
+endobj
+31 0 obj
+<< /Type /Catalog /Pages 17 0 R >>
+endobj
+xref
+0 32
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000000160 00000 n 
+0000000228 00000 n 
+0000002827 00000 n 
+0000004992 00000 n 
+0000007514 00000 n 
+0000009575 00000 n 
+0000011670 00000 n 
+0000013651 00000 n 
+0000015527 00000 n 
+0000017578 00000 n 
+0000019127 00000 n 
+0000020876 00000 n 
+0000022682 00000 n 
+0000025168 00000 n 
+0000027252 00000 n 
+0000027398 00000 n 
+0000027546 00000 n 
+0000027694 00000 n 
+0000027842 00000 n 
+0000027990 00000 n 
+0000028138 00000 n 
+0000028286 00000 n 
+0000028435 00000 n 
+0000028584 00000 n 
+0000028733 00000 n 
+0000028882 00000 n 
+0000029031 00000 n 
+0000029180 00000 n 
+0000029329 00000 n 
+trailer
+<< /Size 32 /Root 31 0 R >>
+startxref
+29380
+%%EOF

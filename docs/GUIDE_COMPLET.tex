@@ -1,0 +1,745 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf-8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{fancybox}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning}
+
+% Configuration des couleurs
+\definecolor{codebackground}{gray}{0.95}
+\definecolor{codekeyword}{rgb}{0.13,0.29,0.53}
+\definecolor{codestring}{rgb}{0.63,0.13,0.94}
+\definecolor{codecomment}{rgb}{0.13,0.54,0.13}
+
+% Configuration du style de code
+\lstset{
+    backgroundcolor=\color{codebackground},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    commentstyle=\color{codecomment},
+    keywordstyle=\color{codekeyword},
+    stringstyle=\color{codestring},
+    showstringspaces=false,
+    tabsize=4,
+    frame=single,
+    rulecolor=\color{black},
+    captionpos=b
+}
+
+% En-tête et pied de page
+\pagestyle{fancy}
+\lhead{\textbf{EduPredict}}
+\rhead{\textit{Guide Complet}}
+\cfoot{\thepage}
+
+\title{\textbf{📚 EduPredict} \\ \Large Guide Complet : Installation, Configuration et Liaison API-Laravel}
+\author{Documentation Technique}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+% ==================== SECTION 1 ====================
+\section{Vue d'ensemble du projet}
+
+\subsection{Architecture générale}
+
+Le projet \textbf{EduPredict} est une application web de prédiction de réussite scolaire composée de deux composants principaux :
+
+\begin{enumerate}
+    \item \textbf{Backend API (Python FastAPI)} : API de prédiction basée sur un modèle de machine learning
+    \item \textbf{Frontend Web (Laravel + Blade)} : Interface web avec authentification et tableau de bord
+\end{enumerate}
+
+\subsection{Flux de communication}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=2cm]
+    % Nœuds
+    \node (user) [rectangle, draw, fill=blue!20] {Utilisateur};
+    \node (laravel) [rectangle, draw, fill=green!20, right of=user, xshift=2cm] {Laravel};
+    \node (fastapi) [rectangle, draw, fill=orange!20, right of=laravel, xshift=2cm] {FastAPI};
+    \node (model) [rectangle, draw, fill=red!20, right of=fastapi, xshift=2cm] {ML Model};
+    
+    % Flèches
+    \draw[->] (user) -- (laravel) node[midway, above] {Formulaire};
+    \draw[->] (laravel) -- (fastapi) node[midway, above] {HTTP POST};
+    \draw[->] (fastapi) -- (model) node[midway, above] {Prédiction};
+    \draw[->] (model) -- (fastapi) node[midway, below] {Résultat};
+    \draw[->] (fastapi) -- (laravel) node[midway, below] {JSON};
+    \draw[->] (laravel) -- (user) node[midway, below] {Affichage};
+\end{tikzpicture}
+\caption{Architecture générale du système}
+\end{figure}
+
+\newpage
+
+% ==================== SECTION 2 ====================
+\section{Installation et Configuration}
+
+\subsection{Prérequis système}
+
+\begin{itemize}
+    \item \textbf{Python 3.9+} : Pour l'API FastAPI
+    \item \textbf{PHP 8.1+} : Pour Laravel
+    \item \textbf{Composer} : Gestionnaire de paquets PHP
+    \item \textbf{Node.js} : Pour les assets frontend
+    \item \textbf{SQLite/MySQL} : Base de données
+\end{itemize}
+
+\subsection{Étape 1 : Installation de Laravel}
+
+\subsubsection{1.1 Cloner le projet}
+
+\begin{lstlisting}[language=bash]
+cd c:\Users\user\Desktop\PROJETTTTTTTTT\wafamay\classrrom
+cd edupredict
+\end{lstlisting}
+
+\subsubsection{1.2 Installer les dépendances PHP}
+
+\begin{lstlisting}[language=bash]
+# Installation des paquets Composer
+composer install
+
+# Installation des paquets npm
+npm install
+\end{lstlisting}
+
+\subsubsection{1.3 Créer le fichier .env}
+
+\begin{lstlisting}[language=bash]
+# Créer une copie du fichier d'exemple
+copy .env.example .env
+
+# Générer la clé d'application
+php artisan key:generate
+\end{lstlisting}
+
+\subsubsection{1.4 Configuration du fichier .env}
+
+Modifier le fichier \texttt{.env} avec les valeurs appropriées :
+
+\begin{lstlisting}[style=,basicstyle=\ttfamily\footnotesize]
+APP_NAME=EduPredict
+APP_ENV=local
+APP_DEBUG=true
+APP_KEY=base64:...
+
+# Configuration de la base de données
+DB_CONNECTION=sqlite
+# DB_HOST=127.0.0.1
+# DB_PORT=3306
+# DB_DATABASE=edupredict
+# DB_USERNAME=root
+# DB_PASSWORD=
+
+# Configuration de l'API de prédiction
+PREDICT_API_URL=http://127.0.0.1:8001/predict
+PREDICT_API_START_COMMAND=python -m uvicorn api:app --host 127.0.0.1 --port 8001
+\end{lstlisting}
+
+\subsubsection{1.5 Configuration de la base de données}
+
+\begin{lstlisting}[language=bash]
+# Exécuter les migrations
+php artisan migrate
+
+# (Optionnel) Remplir la BD avec des données de test
+php artisan db:seed
+\end{lstlisting}
+
+\subsubsection{1.6 Compiler les assets}
+
+\begin{lstlisting}[language=bash]
+# Mode développement (avec hot reload)
+npm run dev
+
+# Mode production
+npm run build
+\end{lstlisting}
+
+\subsection{Étape 2 : Installation et configuration de l'API Python}
+
+\subsubsection{2.1 Accéder au dossier de l'API}
+
+\begin{lstlisting}[language=bash]
+cd ..
+cd student_project\student_project
+\end{lstlisting}
+
+\subsubsection{2.2 Créer un environnement virtuel Python}
+
+\begin{lstlisting}[language=bash]
+# Créer l'environnement virtuel
+python -m venv venv
+
+# Activer l'environnement
+# Sous Windows (PowerShell)
+.\venv\Scripts\Activate.ps1
+
+# Sous Windows (CMD)
+venv\Scripts\activate
+
+# Sous Linux/macOS
+source venv/bin/activate
+\end{lstlisting}
+
+\subsubsection{2.3 Installer les dépendances Python}
+
+\begin{lstlisting}[language=bash]
+# Mettre à jour pip
+pip install --upgrade pip
+
+# Installer les dépendances
+pip install fastapi uvicorn joblib pandas scikit-learn
+\end{lstlisting}
+
+\subsubsection{2.4 Vérifier les fichiers du modèle}
+
+\begin{lstlisting}[language=bash]
+# Les fichiers suivants doivent exister dans le dossier "model/"
+ls model/
+# Output:
+# model.pkl
+# scaler.pkl
+\end{lstlisting}
+
+\newpage
+
+% ==================== SECTION 3 ====================
+\section{Démarrage et Exécution}
+
+\subsection{Démarrage de l'API FastAPI}
+
+\subsubsection{3.1 Premier démarrage}
+
+\begin{lstlisting}[language=bash]
+# Depuis le répertoire student_project/student_project
+# S'assurer que l'environnement virtuel est activé
+
+python -m uvicorn api:app --host 127.0.0.1 --port 8001 --reload
+\end{lstlisting}
+
+\textbf{Résultat attendu :}
+\begin{lstlisting}[style=,basicstyle=\ttfamily\footnotesize]
+INFO:     Uvicorn running on http://127.0.0.1:8001
+INFO:     Application startup complete
+\end{lstlisting}
+
+\subsubsection{3.2 Vérifier l'API}
+
+Ouvrir un navigateur et visiter : \url{http://127.0.0.1:8001}
+
+La réponse doit être :
+\begin{lstlisting}[language=json]
+{
+  "message": "Student API working"
+}
+\end{lstlisting}
+
+\subsection{Démarrage de Laravel}
+
+\subsubsection{3.3 Lancer le serveur Laravel}
+
+\begin{lstlisting}[language=bash]
+# Depuis le répertoire edupredict
+php artisan serve
+\end{lstlisting}
+
+\textbf{Résultat attendu :}
+\begin{lstlisting}[style=,basicstyle=\ttfamily\footnotesize]
+INFO Server running on [http://127.0.0.1:8000]
+\end{lstlisting}
+
+\subsubsection{3.4 Accéder à l'application}
+
+Ouvrir un navigateur et visiter : \url{http://127.0.0.1:8000}
+
+\subsection{Commandes complètes pour démarrage rapide}
+
+\textbf{Terminal 1 - API FastAPI :}
+\begin{lstlisting}[language=bash]
+cd c:\Users\user\Desktop\PROJETTTTTTTTT\wafamay\classrrom\student_project\student_project
+.\venv\Scripts\Activate.ps1
+python -m uvicorn api:app --host 127.0.0.1 --port 8001 --reload
+\end{lstlisting}
+
+\textbf{Terminal 2 - Serveur de développement Node :}
+\begin{lstlisting}[language=bash]
+cd c:\Users\user\Desktop\PROJETTTTTTTPT\wafamay\classrrom\edupredict
+npm run dev
+\end{lstlisting}
+
+\textbf{Terminal 3 - Application Laravel :}
+\begin{lstlisting}[language=bash]
+cd c:\Users\user\Desktop\PROJETTTTTTTPT\wafamay\classrrom\edupredict
+php artisan serve
+\end{lstlisting}
+
+\newpage
+
+% ==================== SECTION 4 ====================
+\section{Liaison API-Laravel : Explication Détaillée}
+
+\subsection{4.1 Configuration de l'API dans Laravel}
+
+La configuration de l'API est centralisée dans le fichier \texttt{config/services.php} :
+
+\begin{lstlisting}[language=php]
+'predict_api' => [
+    'url' => env('PREDICT_API_URL', 'http://127.0.0.1:8001/predict'),
+    'start_command' => env('PREDICT_API_START_COMMAND', 
+        'python -m uvicorn api:app --host 127.0.0.1 --port 8001'),
+],
+\end{lstlisting}
+
+\subsection{4.2 Flow de la requête utilisateur}
+
+\subsubsection{Étape 1 : Soumission du formulaire}
+
+L'utilisateur complète le formulaire de prédiction :
+
+\begin{lstlisting}[language=html]
+<form method="POST" action="{{ route('student.predict') }}">
+    @csrf
+    <input name="name" type="text" required>
+    <input name="age" type="number" min="15" max="25" required>
+    <input name="study_time" type="number" min="1" max="4" required>
+    <input name="failures" type="number" min="0" max="3" required>
+    <input name="absence" type="number" min="0" required>
+    <input name="filiere" type="text">
+    <button type="submit">Prédire</button>
+</form>
+\end{lstlisting}
+
+\subsubsection{Étape 2 : Traitement dans le contrôleur Laravel}
+
+La route dirige vers \texttt{StudentController@predict} :
+
+\begin{lstlisting}[language=php]
+// Routes (routes/web.php)
+Route::post('/student/predict', 
+    [StudentController::class, 'predict']
+)->name('student.predict');
+\end{lstlisting}
+
+\subsubsection{Étape 3 : Validation des données}
+
+Le contrôleur valide les données reçues :
+
+\begin{lstlisting}[language=php]
+// app/Http/Controllers/StudentController.php
+public function predict(Request $request): RedirectResponse
+{
+    $validated = $request->validate([
+        'name'       => ['required', 'string', 'max:255'],
+        'age'        => ['required', 'integer', 'min:15', 'max:25'],
+        'study_time' => ['required', 'integer', 'min:1', 'max:4'],
+        'failures'   => ['required', 'integer', 'min:0', 'max:3'],
+        'absence'    => ['required', 'integer', 'min:0'],
+        'filiere'    => ['nullable', 'string', 'max:255'],
+    ]);
+    // ...
+}
+\end{lstlisting}
+
+\subsubsection{Étape 4 : Appel HTTP à l'API FastAPI}
+
+Laravel effectue une requête POST vers l'API :
+
+\begin{lstlisting}[language=php]
+try {
+    $response = Http::timeout(10)
+        ->acceptJson()
+        ->post(config('services.predict_api.url'), [
+            'age'      => $validated['age'],
+            'studytime' => $validated['study_time'],
+            'failures' => $validated['failures'],
+            'absences' => $validated['absence'],
+        ])
+        ->throw()
+        ->json();
+} catch (ConnectionException $exception) {
+    return back()
+        ->withInput()
+        ->withErrors([
+            'api' => "Impossible de joindre l'API..."
+        ]);
+}
+\end{lstlisting}
+
+\textbf{Détails de la requête :}
+\begin{itemize}
+    \item \textbf{Méthode} : POST
+    \item \textbf{URL} : \texttt{http://127.0.0.1:8001/predict}
+    \item \textbf{Timeout} : 10 secondes
+    \item \textbf{Corps} : JSON avec les données du formulaire
+    \item \textbf{Headers} : \texttt{Accept: application/json}
+\end{itemize}
+
+\subsubsection{Étape 5 : Réponse de l'API FastAPI}
+
+L'API FastAPI reçoit la requête et traite les données :
+
+\begin{lstlisting}[language=python]
+# student_project/student_project/api.py
+@app.post("/predict")
+def predict(data: dict):
+    try:
+        # 1. Convertir les données en DataFrame
+        df = pd.DataFrame([data])
+        
+        # 2. Normaliser les données
+        scaled_features = scaler.transform(df)
+        
+        # 3. Faire la prédiction (0 ou 1)
+        prediction = int(model.predict(scaled_features)[0])
+        
+        # 4. Calculer la probabilité
+        probability = float(
+            model.predict_proba(scaled_features)[0][1]
+        )
+        
+        # 5. Retourner le résultat en JSON
+        return {
+            "prediction": prediction,
+            "probability_success": probability,
+        }
+    except Exception as exc:
+        raise HTTPException(
+            status_code=500, 
+            detail=str(exc)
+        )
+\end{lstlisting}
+
+\subsubsection{Étape 6 : Traitement de la réponse}
+
+Laravel traite la réponse de l'API :
+
+\begin{lstlisting}[language=php]
+$prediction = (int) ($response['prediction'] ?? 0);
+$probability = isset($response['probability_success'])
+    ? round(((float) $response['probability_success']) * 100, 2)
+    : null;
+$result = $prediction === 1 ? 'Reussi' : 'Echoue';
+\end{lstlisting}
+
+\subsubsection{Étape 7 : Enregistrement en base de données}
+
+Les résultats sont stockés :
+
+\begin{lstlisting}[language=php]
+Student::create([
+    'user_id'    => $request->user()->id,
+    'name'       => $validated['name'],
+    'age'        => $validated['age'],
+    'study_time' => $validated['study_time'],
+    'failures'   => $validated['failures'],
+    'absence'    => $validated['absence'],
+    'filiere'    => $validated['filiere'] ?? '',
+    'probability' => $probability,
+    'result'     => $result,
+]);
+\end{lstlisting}
+
+\subsubsection{Étape 8 : Retour à l'utilisateur}
+
+L'application redirige avec les résultats :
+
+\begin{lstlisting}[language=php]
+return redirect()
+    ->route('student.dashboard')
+    ->with([
+        'result'      => $result,
+        'probability' => $probability,
+    ]);
+\end{lstlisting}
+
+\newpage
+
+\subsection{4.3 Diagramme de flux complet}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=2.5cm, thick]
+    % Styles
+    \tikzstyle{usernode} = [rectangle, draw, fill=blue!20, text width=2cm, text centered]
+    \tikzstyle{laravelnode} = [rectangle, draw, fill=green!20, text width=2cm, text centered]
+    \tikzstyle{apinode} = [rectangle, draw, fill=orange!20, text width=2cm, text centered]
+    \tikzstyle{dbnode} = [cylinder, draw, fill=purple!20, text width=1.5cm, text centered, aspect=0.4]
+    
+    % Nœuds
+    \node (user) [usernode] {Utilisateur \\ remplit formulaire};
+    \node (valid) [laravelnode, below of=user] {Laravel valide \\ les données};
+    \node (apicall) [laravelnode, below of=valid] {POST à l'API \\ /predict};
+    \node (apireceive) [apinode, below of=apicall] {FastAPI reçoit \\ les données};
+    \node (process) [apinode, below of=apireceive] {Normalisation \\ + Prédiction};
+    \node (response) [apinode, below of=process] {Retour JSON \\ (résultat + prob)};
+    \node (store) [dbnode, right of=valid, xshift=3.5cm] {Base de \\ données};
+    \node (display) [laravelnode, below of=response] {Laravel affiche \\ les résultats};
+    
+    % Flèches
+    \draw[->] (user) -- (valid);
+    \draw[->] (valid) -- (apicall);
+    \draw[->] (apicall) -- (apireceive);
+    \draw[->] (apireceive) -- (process);
+    \draw[->] (process) -- (response);
+    \draw[->] (response) -- (display);
+    \draw[->] (display) -- (store);
+\end{tikzpicture}
+\caption{Flux complet de la prédiction}
+\end{figure}
+
+\subsection{4.4 Gestion des erreurs}
+
+\subsubsection{ConnectionException - API non accessible}
+
+\begin{lstlisting}[language=php]
+catch (ConnectionException $exception) {
+    return back()
+        ->withInput()
+        ->withErrors([
+            'api' => "Impossible de joindre l'API de prediction..."
+        ]);
+}
+\end{lstlisting}
+
+\textbf{Solutions :}
+\begin{enumerate}
+    \item Vérifier que l'API FastAPI est en cours d'exécution
+    \item Vérifier l'URL dans \texttt{.env}
+    \item Vérifier la connexion réseau
+\end{enumerate}
+
+\subsubsection{RequestException - API retourne une erreur}
+
+\begin{lstlisting}[language=php]
+catch (RequestException $exception) {
+    return back()
+        ->withInput()
+        ->withErrors([
+            'api' => "L'API de prediction a repondu avec une erreur..."
+        ]);
+}
+\end{lstlisting}
+
+\textbf{Solutions :}
+\begin{enumerate}
+    \item Vérifier les logs de l'API
+    \item Vérifier les données envoyées
+    \item Vérifier que le modèle ML est bien chargé
+\end{enumerate}
+
+\newpage
+
+% ==================== SECTION 5 ====================
+\section{Fichiers et Structure}
+
+\subsection{Structure Laravel}
+
+\begin{lstlisting}[style=,basicstyle=\ttfamily\footnotesize]
+edupredict/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── StudentController.php    # Gère les prédictions
+│   │   │   ├── AdminController.php      # Gère le dashboard admin
+│   │   │   └── AuthController.php       # Authentification
+│   │   └── Middleware/
+│   ├── Models/
+│   │   ├── Student.php                  # Modèle des prédictions
+│   │   └── User.php                     # Modèle utilisateurs
+│   └── Providers/
+├── config/
+│   ├── app.php
+│   ├── auth.php
+│   ├── database.php
+│   └── services.php                     # CONFIG API (important!)
+├── database/
+│   ├── migrations/                      # Schéma BD
+│   └── seeders/                         # Données de test
+├── resources/
+│   ├── views/
+│   │   ├── welcome.blade.php            # Page accueil
+│   │   ├── admin/
+│   │   ├── auth/                        # Pages login/register
+│   │   └── student/                     # Pages student
+│   ├── css/
+│   └── js/
+├── routes/
+│   └── web.php                          # Routes (important!)
+└── .env                                 # Variables d'environnement
+\end{lstlisting}
+
+\subsection{Structure API FastAPI}
+
+\begin{lstlisting}[style=,basicstyle=\ttfamily\footnotesize]
+student_project/student_project/
+├── api.py                               # API FastAPI (important!)
+├── app.py                               # App Flask (optionnel)
+├── train.py                             # Script d'entraînement
+├── model/
+│   ├── model.pkl                        # Modèle ML
+│   └── scaler.pkl                       # Normaliseur
+├── data/                                # Données d'entraînement
+└── venv/                                # Environnement Python
+\end{lstlisting}
+
+\newpage
+
+% ==================== SECTION 6 ====================
+\section{Commandes Utiles}
+
+\subsection{Commandes Laravel}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{|p{4cm}|p{8cm}|}
+\hline
+\textbf{Commande} & \textbf{Description} \\
+\hline
+\texttt{php artisan serve} & Démarrer le serveur dev \\
+\hline
+\texttt{php artisan migrate} & Exécuter les migrations \\
+\hline
+\texttt{php artisan migrate:refresh} & Réinitialiser la BD \\
+\hline
+\texttt{php artisan db:seed} & Remplir avec données de test \\
+\hline
+\texttt{php artisan tinker} & Console interactive \\
+\hline
+\texttt{php artisan route:list} & Voir toutes les routes \\
+\hline
+\texttt{npm run dev} & Compiler assets (dev) \\
+\hline
+\texttt{npm run build} & Compiler assets (prod) \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Commandes Python/API}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{|p{4cm}|p{8cm}|}
+\hline
+\textbf{Commande} & \textbf{Description} \\
+\hline
+\texttt{python -m venv venv} & Créer environnement virtuel \\
+\hline
+\texttt{.\textbackslash venv\textbackslash Scripts\textbackslash Activate.ps1} & Activer venv (Windows PS) \\
+\hline
+\texttt{venv\textbackslash Scripts\textbackslash activate} & Activer venv (Windows CMD) \\
+\hline
+\texttt{pip install -r requirements.txt} & Installer dépendances \\
+\hline
+\texttt{python -m uvicorn api:app --reload} & Lancer API en dev \\
+\hline
+\texttt{python train.py} & Entraîner le modèle \\
+\hline
+\end{tabular}
+\end{table}
+
+\newpage
+
+% ==================== SECTION 7 ====================
+\section{Résumé des Étapes}
+
+\subsection{Pour la première utilisation}
+
+\begin{enumerate}
+    \item \textbf{Cloner le projet}
+    \item \textbf{Installer Laravel}
+        \begin{itemize}
+            \item \texttt{composer install}
+            \item \texttt{npm install}
+            \item \texttt{cp .env.example .env}
+            \item \texttt{php artisan key:generate}
+            \item \texttt{php artisan migrate}
+        \end{itemize}
+    \item \textbf{Installer l'API}
+        \begin{itemize}
+            \item Créer venv : \texttt{python -m venv venv}
+            \item Activer : \texttt{.\textbackslash venv\textbackslash Scripts\textbackslash Activate.ps1}
+            \item Installer : \texttt{pip install fastapi uvicorn joblib pandas scikit-learn}
+        \end{itemize}
+    \item \textbf{Lancer les services (3 terminaux)}
+        \begin{itemize}
+            \item Terminal 1 : API Python \texttt{python -m uvicorn api:app --reload}
+            \item Terminal 2 : \texttt{npm run dev}
+            \item Terminal 3 : \texttt{php artisan serve}
+        \end{itemize}
+    \item \textbf{Accéder à} \url{http://127.0.0.1:8000}
+\end{enumerate}
+
+\subsection{Fichiers clés à connaître}
+
+\begin{itemize}
+    \item \textbf{config/services.php} : Configuration API
+    \item \textbf{routes/web.php} : Routes Laravel
+    \item \textbf{app/Http/Controllers/StudentController.php} : Logique prédiction
+    \item \textbf{student\_project/student\_project/api.py} : Endpoint API
+    \item \textbf{.env} : Variables d'environnement
+\end{itemize}
+
+\newpage
+
+% ==================== SECTION 8 ====================
+\section{Dépannage}
+
+\subsection{Problèmes courants}
+
+\begin{enumerate}
+    \item \textbf{Erreur : "Impossible de joindre l'API"}
+    \begin{itemize}
+        \item ✓ Vérifier que \texttt{python -m uvicorn api:app} est en cours d'exécution
+        \item ✓ Vérifier que le port 8001 est libre
+        \item ✓ Vérifier \texttt{PREDICT\_API\_URL} dans \texttt{.env}
+    \end{itemize}
+    
+    \item \textbf{Erreur : "Model file not found"}
+    \begin{itemize}
+        \item ✓ Vérifier que \texttt{model/model.pkl} existe
+        \item ✓ Vérifier que \texttt{model/scaler.pkl} existe
+        \item ✓ Lancer \texttt{python train.py} pour générer les fichiers
+    \end{itemize}
+    
+    \item \textbf{Erreur : "Connection refused"}
+    \begin{itemize}
+        \item ✓ Vérifier le firewall Windows
+        \item ✓ Essayer avec localhost au lieu de 127.0.0.1
+    \end{itemize}
+    
+    \item \textbf{Erreur de base de données}
+    \begin{itemize}
+        \item ✓ Lancer \texttt{php artisan migrate:refresh}
+        \item ✓ Vérifier \texttt{DB\_CONNECTION} dans \texttt{.env}
+    \end{itemize}
+\end{enumerate}
+
+\section{Conclusion}
+
+Le projet EduPredict intègre une \textbf{API Python} et une \textbf{application web Laravel} à travers des appels HTTP. La communication se fait de manière synchrone : Laravel envoie les données utilisateur à l'API, attend la prédiction, puis stocke le résultat en base de données.
+
+Cette architecture permet une séparation des responsabilités :
+\begin{itemize}
+    \item \textbf{API} : Gère uniquement la prédiction ML
+    \item \textbf{Laravel} : Gère l'interface, l'authentification et la persistance
+\end{itemize}
+
+\end{document}
