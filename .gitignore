@@ -1,0 +1,6 @@
+node_modules/ 
+.env 
+ai-service-fastapi/venv/ 
+venv/ 
+node_modules/ 
+.env 
